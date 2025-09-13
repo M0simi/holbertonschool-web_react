@@ -1,40 +1,33 @@
-interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
+interface Teacher {
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
   location: string;
+
+  // خصائص إضافية باسم نصي ونوع أي شيء
+  [propName: string]: any;
 }
 
-const student1: Student = {
-  firstName: "Meshari",
-  lastName: "Alosimi",
-  age: 25,
-  location: "Riyadh"
+// 2) مثال من نص السؤال
+const teacher3: Teacher = {
+  firstName: 'John',
+  fullTimeEmployee: false,
+  lastName: 'Doe',
+  location: 'London',
+  contract: false, // خاصية إضافية (ما كانت مذكورة في الواجهة بشكل صريح)
 };
 
-const student2: Student = {
-  firstName: "Saleh",
-  lastName: "Alharbi",
-  age: 27,
-  location: "Jeddah"
+// 3) أمثلة إضافية (اختياري) للتوضيح
+const seniorTeacher: Teacher = {
+  firstName: 'Layla',
+  lastName: 'AlHarbi',
+  fullTimeEmployee: true,
+  location: 'Riyadh',
+  yearsOfExperience: 8,
+  department: 'Mathematics', // خاصية إضافية
 };
 
-const studentsList: Student[] = [student1, student2];
-
-const table = document.createElement("table");
-
-studentsList.forEach((student) => {
-  const row = document.createElement("tr");
-
-  const firstNameCell = document.createElement("td");
-  firstNameCell.textContent = student.firstName;
-
-  const locationCell = document.createElement("td");
-  locationCell.textContent = student.location;
-
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
-  table.appendChild(row);
-});
-
-document.body.appendChild(table);
+// 4) الطباعة للتأكد
+console.log(teacher3);
+console.log(seniorTeacher);
