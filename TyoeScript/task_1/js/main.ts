@@ -1,33 +1,28 @@
+// واجهة المعلّم Teacher
+// - firstName و lastName للقراءة فقط (تتحدد وقت الإنشاء ولا تتغير)
+// - yearsOfExperience اختيارية
+// - نسمح بخصائص إضافية بأي اسم ونوع عبر Index Signature
 interface Teacher {
   readonly firstName: string;
   readonly lastName: string;
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
-
-  // خصائص إضافية باسم نصي ونوع أي شيء
-  [propName: string]: any;
+  [propName: string]: any; // خصائص إضافية مثل: contract, department, ...
 }
 
-// 2) مثال من نص السؤال
-const teacher3: Teacher = {
+// واجهة المدير Directors تورّث من Teacher وتضيف numberOfReports
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// مثال مطلوب في التمرين
+const director1: Directors = {
   firstName: 'John',
-  fullTimeEmployee: false,
   lastName: 'Doe',
   location: 'London',
-  contract: false, // خاصية إضافية (ما كانت مذكورة في الواجهة بشكل صريح)
-};
-
-// 3) أمثلة إضافية (اختياري) للتوضيح
-const seniorTeacher: Teacher = {
-  firstName: 'Layla',
-  lastName: 'AlHarbi',
   fullTimeEmployee: true,
-  location: 'Riyadh',
-  yearsOfExperience: 8,
-  department: 'Mathematics', // خاصية إضافية
+  numberOfReports: 17,
 };
 
-// 4) الطباعة للتأكد
-console.log(teacher3);
-console.log(seniorTeacher);
+console.log(director1);
