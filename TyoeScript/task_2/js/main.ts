@@ -41,8 +41,7 @@ export class Teacher implements TeacherInterface {
 }
 
 /*******************************
- * 3) الدالة createEmployee
- * ترجع Director أو Teacher حسب الراتب
+ * 3) createEmployee
  *******************************/
 export type Employee = Director | Teacher;
 
@@ -54,8 +53,24 @@ export function createEmployee(salary: number | string): Employee {
 }
 
 /*******************************
- * 4) أمثلة تشغيل (اختياري)
+ * 4) isDirector (type guard)
+ *    executeWork
  *******************************/
-// console.log(createEmployee(200));   // Teacher
-// console.log(createEmployee(1000));  // Director
-// console.log(createEmployee('$500')); // Director
+// type predicate: يثبت للمصرّف أن employee هو Director داخل الفرع الشرطي
+export function isDirector(employee: Employee): employee is Director {
+  return employee instanceof Director;
+}
+
+// ينفّذ المهمة المناسبة حسب نوع الموظف
+export function executeWork(employee: Employee): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  }
+  return employee.workTeacherTasks();
+}
+
+/*******************************
+ * 5) أمثلة تشغيل (اختياري)
+ *******************************/
+// console.log(executeWork(createEmployee(200)));   // Getting to work
+// console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
