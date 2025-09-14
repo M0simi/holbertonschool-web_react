@@ -53,15 +53,12 @@ export function createEmployee(salary: number | string): Employee {
 }
 
 /*******************************
- * 4) isDirector (type guard)
- *    executeWork
+ * 4) isDirector (type guard) + executeWork
  *******************************/
-// type predicate: يثبت للمصرّف أن employee هو Director داخل الفرع الشرطي
 export function isDirector(employee: Employee): employee is Director {
   return employee instanceof Director;
 }
 
-// ينفّذ المهمة المناسبة حسب نوع الموظف
 export function executeWork(employee: Employee): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -70,7 +67,20 @@ export function executeWork(employee: Employee): string {
 }
 
 /*******************************
- * 5) أمثلة تشغيل (اختياري)
+ * 5) String literal types (Subjects) + teachClass
  *******************************/
+// يسمح فقط بالقيمتين هذي حرفيًا
+export type Subjects = 'Math' | 'History';
+
+export function teachClass(todayClass: Subjects): string {
+  // بما أن النوع محصور، يكفي شرط بسيط
+  return todayClass === 'Math' ? 'Teaching Math' : 'Teaching History';
+}
+
+/*******************************
+ * 6) أمثلة تشغيل (اختياري)
+ *******************************/
+// console.log(teachClass('Math'));    // Teaching Math
+// console.log(teachClass('History')); // Teaching History
 // console.log(executeWork(createEmployee(200)));   // Getting to work
 // console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
